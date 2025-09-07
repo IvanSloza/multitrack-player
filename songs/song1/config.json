@@ -1,1 +1,8 @@
-
+{
+  "title": "Demo Song 1",
+  "tracks": [
+    { "name": "Vocals", "src": "vocals.mp3" },
+    { "name": "Drums", "src": "drums.mp3" },
+    { "name": "Guitar", "src": "guitar.mp3" }
+  ]
+}
