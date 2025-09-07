@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multitrack Player</title>
+  <script src="https://unpkg.com/wavesurfer.js"></script>
+  <script src="https://unpkg.com/wavesurfer.js/dist/plugins/multitrack.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    #waveform { margin: 20px; background: #111; border-radius: 8px; }
+    .controls { text-align: center; margin: 20px; }
+  </style>
+</head>
+<body>
+  <h1 id="song-title">Loading...</h1>
+  <div id="waveform"></div>
+  <div class="controls">
+    <button onclick="player.playPause()">▶️ / ⏸</button>
+    <a href="index.html"><button>⬅ Назад</button></a>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const configPath = params.get("config");
+
+    fetch(configPath)
+      .then(res => res.json())
+      .then(song => {
+        document.getElementById("song-title").textContent = song.title;
+
+        window.player = WaveSurfer.create({
+          container: '#waveform',
+          waveColor: '#1db954',
+          progressColor: '#1ed760',
+          cursorColor: '#fff',
+          plugins: [
+            WaveSurfer.Multitrack.create({
+              tracks: song.tracks,
+              minPxPerSec: 50,
+              barHeight: 2,
+              waveColor: '#555',
+              progressColor: '#1db954'
+            })
+          ]
+        });
+      });
+  </script>
+</body>
+</html>

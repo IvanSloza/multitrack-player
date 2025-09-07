@@ -1,0 +1,5 @@
+{
+  "songs": [
+    { "title": "Demo Song 1", "path": "songs/song1/config.json" }
+  ]
+}
